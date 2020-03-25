@@ -22,6 +22,12 @@ const user = await User.create({
     })
 }
 
+const errorTest = (req,res,next) => {
+    //some code
+    return next(new Error("Failed"))
+}
+
 module.exports = {
-    register
+    register,
+    errorTest
 }
