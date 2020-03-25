@@ -17,14 +17,14 @@ const PORT = process.env.PORT;
 // Routers Middleware
 
 app.use("/api", routers);
-app.use((err,req,res,next) => {
-    console.log("Custom Error Handler")
+// app.use((err,req,res,next) => {
+//     console.log("Custom Error Handler")
 
-    res
-    .json({
-        success: false
-    })
-})
+//     res
+//     .json({
+//         success: false
+//     })
+// })
 
 app.listen(PORT, () => {
     console.log(`Server Started! on ${PORT} = ${process.env.NODE_ENV}`)
