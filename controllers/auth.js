@@ -47,6 +47,21 @@ return res
 
 })
 
+const editDetails = asyncWrapper(async (req,res,next) => {
+  const editInformation = req.body;
+
+  const user = await User.findByIdAndUpdate(req.user.id,editInformation,{
+    new:true,
+    runValidators:true
+  })
+  return res.status(200)
+  .json({
+    success:true,
+    data:user
+  })
+
+  })
+
 const errorTest = (req, res, next) => {
   //some code
   return next(new CustomError("Custom Error Message",400));
@@ -84,5 +99,6 @@ module.exports = {
   getUser,
   login,
   logout,
-  imageUpload
+  imageUpload,
+  editDetails
 };
