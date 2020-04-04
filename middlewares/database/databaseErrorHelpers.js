@@ -2,7 +2,6 @@ const User = require("../../models/User");
 const Question = require("../../models/Question");
 const CustomError = require("../../helpers/error/CustomError")
 const asyncWrapper = require("express-async-handler")
-const Question = require("../../models/Question")
 
 
 const checkUserExist = asyncWrapper(async (req,res,next)=>{
@@ -35,9 +34,10 @@ const checkQuestionExist = asyncWrapper(async (req,res,next)=>{
 
 const getQuestionOwnerAccess = asyncWrapper(async (req,res,next)=>{
     const userId = req.user.id;
-    const questionId = req.param.id;
+    const questionId = req.params.id;
 
-    const question = Question.findById(questionId)
+    const question = await Question.findById(questionId)
+    
 
     if(question.user != userId){
         return next(new CustomError("Only owner can handle this operation",403))
