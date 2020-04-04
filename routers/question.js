@@ -32,7 +32,7 @@ router.delete(
 router.get("/:id/like", [getAccessToRoute, checkQuestionExist], likeQuestion);
 router.get("/:id/undolike", [getAccessToRoute, checkQuestionExist], undoLike)
 
-router.use("/:id/answer",checkQuestionExist, answerRoute)
+router.use("/:id/answers",checkQuestionExist, answerRoute)
 
 
 module.exports = router;

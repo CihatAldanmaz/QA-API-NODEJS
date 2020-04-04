@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Question = require("./Question")
 
 const AnswerSchema = new Schema({
     content: {
@@ -27,5 +28,26 @@ const AnswerSchema = new Schema({
         default:Date.now
     }
 });
+
+AnswerSchema.pre("save", async function(next){
+    if(!this.isModified("user")){
+        return next();
+    }
+    console.log("hereisgo")
+
+    try {
+    const question = await Question.findById(this.question)
+
+    question.answers.push(this._id);
+
+    await question.save();
+        next();
+    } catch (error) {
+        return new(err)
+    }
+
+    
+
+})
 
 module.exports = mongoose.model("Answer",AnswerSchema)

@@ -69,7 +69,7 @@ const deleteQuestion = asyncWrapper(async(req,res,next) => {
     const id = req.params.id;
 
     await Question.findByIdAndDelete(id);
-    console.log(id)
+   
     res.status(200)
     .json({
         success:true,
@@ -81,7 +81,7 @@ const likeQuestion = asyncWrapper(async(req,res,next) => {
     const {id} = req.params;
 
     const question = await Question.findById(id)
-    console.log(question)
+   
     if(question.likes.includes(req.user.id)){
         return next(new CustomError("You already liked this it",400))
     }
