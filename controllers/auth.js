@@ -15,12 +15,8 @@ const register = asyncWrapper(async (req, res, next) => {
         password
       });
       sendJwtToClient(user,res)
-      // const token = user.generateJwtFromUser();
       
-      // res.json({
-      //   success: true,
-      //   data: user
-      // });
+    
       
 });
 
